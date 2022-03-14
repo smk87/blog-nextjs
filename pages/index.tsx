@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const HomePage: NextPage = () => {
     return (
@@ -11,9 +12,9 @@ const HomePage: NextPage = () => {
             <main>
                 <h1>My Blog</h1>
                 <ul>
-                    <li>One</li>
-                    <li>Two</li>
-                    <li>Three</li>
+                    <li>
+                        <Link href="/posts/first-post">First Post</Link>
+                    </li>
                 </ul>
             </main>
         </>
