@@ -1,4 +1,4 @@
-import { readFile } from 'fs/promises';
+import { readFile, readdir } from 'fs/promises';
 import { marked } from 'marked';
 import matter from 'gray-matter';
 
@@ -14,4 +14,13 @@ export const getPost = async (slug: string) => {
         body,
         date,
     };
+};
+
+export const getSlugs = async () => {
+    const suffix = '.md';
+    const files = await readdir('content/posts');
+
+    return files
+        .filter((file) => file.endsWith(suffix))
+        .map((file) => file.slice(0, -suffix.length));
 };

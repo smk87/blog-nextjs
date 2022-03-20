@@ -1,12 +1,8 @@
-import {
-    NextPage,
-    GetStaticProps,
-    GetStaticPaths,
-    GetStaticPropsContext,
-} from 'next';
+import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
-import { getPost } from '../../lib';
+
+import { getPost, getSlugs } from '../../lib';
 
 interface FirstPageProps {
     title: string;
@@ -17,20 +13,15 @@ interface StaticPathParams extends ParsedUrlQuery {
     slug: string;
 }
 
-export const getStaticPaths: GetStaticPaths<StaticPathParams> = () => {
+export const getStaticPaths: GetStaticPaths<StaticPathParams> = async () => {
+    const slugs = await getSlugs();
+
     return {
-        paths: [
-            {
-                params: {
-                    slug: 'first-post',
-                },
+        paths: slugs.map((slug) => ({
+            params: {
+                slug,
             },
-            {
-                params: {
-                    slug: 'second-post',
-                },
-            },
-        ],
+        })),
         fallback: false,
     };
 };
