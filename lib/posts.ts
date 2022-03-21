@@ -24,3 +24,15 @@ export const getSlugs = async () => {
         .filter((file) => file.endsWith(suffix))
         .map((file) => file.slice(0, -suffix.length));
 };
+
+export const getPosts = async () => {
+    const slugs = await getSlugs();
+    const posts: any[] = [];
+
+    for (const slug of slugs) {
+        const post = await getPost(slug);
+        posts.push({ slug, ...post });
+    }
+
+    return posts;
+};

@@ -4,7 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { getPost, getSlugs } from '../../lib';
 
-interface FirstPageProps {
+interface PostPageProps {
     title: string;
     body: string;
 }
@@ -13,6 +13,7 @@ interface StaticPathParams extends ParsedUrlQuery {
     slug: string;
 }
 
+// Generates static paths from dynamic path
 export const getStaticPaths: GetStaticPaths<StaticPathParams> = async () => {
     const slugs = await getSlugs();
 
@@ -28,7 +29,7 @@ export const getStaticPaths: GetStaticPaths<StaticPathParams> = async () => {
 
 // Good place to run code on the Node.js server
 export const getStaticProps: GetStaticProps<
-    FirstPageProps,
+    PostPageProps,
     StaticPathParams
 > = async (context) => {
     const { slug } = context.params!;
@@ -41,7 +42,7 @@ export const getStaticProps: GetStaticProps<
     };
 };
 
-const FirstPostPage: NextPage<FirstPageProps> = ({ title, body }) => {
+const FirstPostPage: NextPage<PostPageProps> = ({ title, body }) => {
     return (
         <>
             <Head>
@@ -49,7 +50,6 @@ const FirstPostPage: NextPage<FirstPageProps> = ({ title, body }) => {
                 <meta name="description" content="This is my blog" />
             </Head>
             <main>
-                <h1>{title}</h1>
                 <article dangerouslySetInnerHTML={{ __html: body }} />
             </main>
         </>

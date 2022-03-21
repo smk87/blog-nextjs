@@ -1,8 +1,27 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 
-const HomePage: NextPage = () => {
+import { getPosts } from '../lib';
+
+interface StaticPathParams {
+    posts: {
+        slug: string;
+        title: string;
+    }[];
+}
+
+export const getStaticProps: GetStaticProps<StaticPathParams> = async () => {
+    const posts = await getPosts();
+
+    return {
+        props: {
+            posts,
+        },
+    };
+};
+
+const HomePage: NextPage<StaticPathParams> = ({ posts }) => {
     return (
         <>
             <Head>
@@ -12,9 +31,11 @@ const HomePage: NextPage = () => {
             <main>
                 <h1>My Blog</h1>
                 <ul>
-                    <li>
-                        <Link href="/posts/first-post">First Post</Link>
-                    </li>
+                    {posts.map(({ slug, title }) => (
+                        <li key={slug}>
+                            <Link href={`/posts/${slug}`}>{title}</Link>
+                        </li>
+                    ))}
                 </ul>
             </main>
         </>
