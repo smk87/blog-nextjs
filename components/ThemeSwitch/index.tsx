@@ -1,18 +1,31 @@
 import { ReactElement, useState } from 'react';
+
 import DarkTheme from './DarkTheme';
 
+const loadDarkMode = () => {
+    // When pre rendering on the server
+    if (typeof localStorage === 'undefined') {
+        return false;
+    }
+
+    const value = localStorage.getItem('darkMode');
+
+    return value === null ? false : Boolean(JSON.parse(value));
+};
+
 const ThemeSwitch = (): ReactElement => {
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState<boolean>(loadDarkMode);
+
+    const handleClick = () => {
+        localStorage.setItem('darkMode', JSON.stringify(!darkMode));
+        setDarkMode((darkMode) => !darkMode);
+    };
 
     const text = darkMode ? 'Light Mode' : 'Dark Mode';
 
     return (
         <>
-            <button
-                onClick={() => {
-                    setDarkMode((darkMode) => !darkMode);
-                }}
-            >
+            <button onClick={handleClick} suppressHydrationWarning>
                 {text}
             </button>
 
