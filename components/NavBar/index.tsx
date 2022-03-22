@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
-import ThemeSwitch from '../ThemeSwitch';
+import { ThemeSwitch } from '../';
 
-const NavBar = (): ReactElement => {
+export const NavBar = (): ReactElement => {
     return (
         <nav>
             <ul>
@@ -38,5 +38,3 @@ const NavBar = (): ReactElement => {
         </nav>
     );
 };
-
-export default NavBar;

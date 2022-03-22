@@ -13,7 +13,7 @@ const loadDarkMode = () => {
     return value === null ? false : Boolean(JSON.parse(value));
 };
 
-const ThemeSwitch = (): ReactElement => {
+export const ThemeSwitch = (): ReactElement => {
     const [darkMode, setDarkMode] = useState<boolean>(loadDarkMode);
 
     const handleClick = () => {
@@ -44,5 +44,3 @@ const ThemeSwitch = (): ReactElement => {
         </>
     );
 };
-
-export default ThemeSwitch;
