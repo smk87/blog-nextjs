@@ -1,7 +1,9 @@
-import { NextPage } from 'next';
 import Link from 'next/link';
+import { ReactElement } from 'react';
 
-const NavBar: NextPage = () => {
+import { ThemeSwitch } from '../';
+
+export const NavBar = (): ReactElement => {
     return (
         <nav>
             <ul>
@@ -12,7 +14,13 @@ const NavBar: NextPage = () => {
                     <Link href="/">Home </Link>
                 </li>
             </ul>
+            <ThemeSwitch />
             <style jsx>{`
+                nav {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
                 ul {
                     list-style-type: none;
                     padding: 0;
@@ -30,5 +38,3 @@ const NavBar: NextPage = () => {
         </nav>
     );
 };
-
-export default NavBar;

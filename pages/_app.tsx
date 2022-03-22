@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 
-import NavBar from '../components/NavBar';
+import { NavBar } from '../components';
 import '../styles/globals.css';
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
