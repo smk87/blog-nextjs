@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     const user = {
         isLoggedIn: true,
         roles: ['admin', 'editor'],
-    };
+    }; // Dummy user data; change role to check useAuth hook
 
     useAuth(user); // Checks the user for Authentication and Authorization
 
